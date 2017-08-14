@@ -1,5 +1,5 @@
 <%= @article.title %><br>
-<%= @article.text %>
+<%= @markdown.render(@article.text).html_safe %>
 
 
 

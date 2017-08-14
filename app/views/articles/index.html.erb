@@ -3,7 +3,7 @@
 
 <% @articles.each do |article| %>
   <%= article.title %><br>
-  <%= article.text %>
+  <%= @markdown.render(article.text).html_safe %>
 
 <br>
 <%= link_to 'Show', article %>
