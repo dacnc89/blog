@@ -5,3 +5,8 @@
 
 <br>
 <%= link_to 'Back', root_path %>
+
+<h1> Comments </h1>
+<%= render @article.comments %>
+<%= render 'comments/form' %>
+
