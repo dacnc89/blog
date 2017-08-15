@@ -1,3 +1,8 @@
+<%= form_tag articles_path, method: :get do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag 'Search'%>
+<% end %>
+
 <h1>list articles</h1>
 <br>
 

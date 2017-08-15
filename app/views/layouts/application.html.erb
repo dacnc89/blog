@@ -15,7 +15,15 @@
           <%= value %>
         </div>
       <% end %>
-      <%= yield %>
+      
+      <% if user_signed_in? %>
+        Logged in as <%= @current_user.name %>
+        <%= link_to 'Logout', logout_path, class: "float-right", method: :delete, data: {confirm: "sure to logout?"} %>
+      <% else %>
+        <%= link_to 'Login', login_path,class: "float-right" %>
+      <% end %>
+
+     <%= yield %>
     </div>
   </body>
 </html>

@@ -9,13 +9,23 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @article = Article.find(params[:article_id])
-    @comment = @article.comments.create(comment_params)
-    if @comment.save
-      flash[:success] = "created comment"
-      redirect_to article_path(@article)
+    if user_signed_in?
+      @user = current_user
+      @article = Article.find(params[:article_id])
+      @comment = @article.comments.create(comment_params)
+      @comment.commenter = current_user.name
+      @comment.user_id = current_user.id
+      if @comment.save
+        flash[:success] = "created comment"
+        redirect_to article_path(@article)
+      else
+        flash[:warning] = "Can not create comment"
+        redirect_to  article_path(@article)
+
+      end
     else
-      render 'new'
+      flash[:info] = "Please login to comment for this article"
+      redirect_to login_path
     end
   end
   
@@ -47,6 +57,6 @@ class CommentsController < ApplicationController
   end
   private
   def comment_params
-    params.require(:comment).permit(:commenter, :body)
+    params.require(:comment).permit(:commenter, :body, :article_id, :user_id)
   end
 end

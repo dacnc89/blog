@@ -1,0 +1,11 @@
+<p>
+<% @users.each do |user| %>
+  <%= user.name %><br>
+  <%= user.email %>
+  <%= link_to 'Show', user %>
+  <%= link_to 'Edit', edit_user_path(user) %>
+
+<br><br>
+<% end %>
+
+
