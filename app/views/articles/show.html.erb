@@ -1,3 +1,6 @@
+<% content_for :title do %>
+  <% @article.title %>
+<% end %>
 <%= @article.title %><br>
 <%= @markdown.render(@article.text).html_safe %>
 
