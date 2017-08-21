@@ -1,18 +1,18 @@
-<h1> Form for comment </h1>
+<!-- <h1> Form for comment </h1> -->
 <%= form_for [ @article, @article.comments.build] do |f| %>
-  <p>Please enter your comment 
+  <!-- <p>Please enter your comment  -->
+  <p>
+    <%= f.submit %>
+  <!-- </p>
   <% if current_user %>
     <%= current_user.name %> :
-  <% end %>
+  <% end %> -->
   </p>
 
   <p>
-    <%= f.label :body %>
+    <!-- <%= f.label :body %> -->
     <%= f.text_area :body %>
   </p>
   
   
-  <p>
-    <%= f.submit %>
-  </p>
 <% end %>

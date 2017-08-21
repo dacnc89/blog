@@ -12,6 +12,7 @@ gem 'redcarpet'
 
 gem 'carrierwave'
 gem 'fog'
+gem 'fog-aws'
 gem 'figaro'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

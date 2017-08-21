@@ -1,6 +1,10 @@
 class CommentsController < ApplicationController
+  before_action :set_comment, except: [:index, :new, :create]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :check_owner, only: [:edit, :destroy]
   def show
-    @comment = Comment.find(params[:id])
+    # @comment = Comment.find(params[:id])
+    
   end
 
   def new
@@ -30,13 +34,11 @@ class CommentsController < ApplicationController
   end
   
   def edit
-    @article = Article.find(params[:article_id])
-    @comment = @article.comments.find(params[:id])
+    # @article = Article.find(params[:article_id])
+    # @comment = @article.comments.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:article_id])
-    @comment = @article.comments.find(params[:id])
     if @comment.update(comment_params)
       flash[:success] = "Edited !"
       redirect_to article_path(@article)
@@ -46,8 +48,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:article_id])
-    @comment = @article.comments.find(params[:id])
+    # @article = Article.find(params[:article_id])
+    # @comment = @article.comments.find(params[:id])
     if @comment.destroy
       flash[:warning] = "Deleted! this comment"
       redirect_to article_path(@article)
@@ -58,5 +60,17 @@ class CommentsController < ApplicationController
   private
   def comment_params
     params.require(:comment).permit(:commenter, :body, :article_id, :user_id)
+  end
+
+  def set_comment
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.find(params[:id])
+  end
+
+  def check_owner
+    if current_user.id != @comment.user_id 
+      flash[:warning] = "Sorry, only owner can do this thing!"
+      redirect_to articles_path
+    end
   end
 end

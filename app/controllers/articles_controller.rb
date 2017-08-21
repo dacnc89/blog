@@ -1,5 +1,8 @@
 class ArticlesController < ApplicationController
-before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :check_owner, only: [:edit, :destroy]
+
   def index
     @articles = Article.search(params[:search])
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
@@ -24,15 +27,17 @@ before_action :set_article, only: [:show, :edit, :update, :destroy]
   end
 
   def edit
-
   end
 
   def update
+    @article.user_id = current_user.id
     if @article.update(article_params)
+
       flash[:success] = "Edit successful"
       redirect_to article_path
     else
-    render 'edit'
+      flash[:warning] = "Some error when updating article #{@article.errors.full_messages}"
+      render 'edit'
     end
   end
 
@@ -52,6 +57,17 @@ before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   private
   def article_params
-    params.require(:article).permit(:title, :text)
+    params.require(:article).permit(:title, :text, :user_id)
   end
+
+  def check_owner
+    
+    if current_user.id != @article.user_id 
+      flash[:warning] = "Sorry, only owner can do this thing!"
+      redirect_to articles_path
+    end
+  end
+
+
+
 end

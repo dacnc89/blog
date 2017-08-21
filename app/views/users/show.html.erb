@@ -1,8 +1,11 @@
+<br>
+<%= image_tag @user.avatar, width: 80, height: 80 %>
 <p> Name: <br>
 <%= @user.name %>
 </p>
 <p> Email <br>
 <%= @user.email %>
 </p>
+<%= link_to 'Manager user', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 

@@ -10,18 +10,67 @@
 
   <body>
     <div class="container">
+
+      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="<%= root_path %>">Sample blog</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <!-- <a class="nav-link" href="http://localhost:3000"> -->
+              <% if user_signed_in? %>
+                  <!-- Logged in as <%= @current_user.name %> -->
+                  <%= link_to 'My account', user_path(current_user), class: "nav-link" %>
+                <% else %>
+                  <%= link_to 'Sign up', new_user_path,class: "nav-link" %> 
+                <% end %>
+              <span class="sr-only">(current)</span>
+              <!-- </a> -->
+            </li>
+            <li class="nav-item">
+              <!-- <a class="nav-link" href="#"> -->
+
+                <% if user_signed_in? %>
+                  <!-- Logged in as <%= @current_user.name %> -->
+                  <%= link_to 'Logout', logout_path, class: "nav-link", method: :delete, data: {confirm: "sure to logout?"} %>
+                <% else %>
+                  <%= link_to 'Login', login_path,class: "nav-link" %> 
+                <% end %>
+                
+              <!-- </a> -->
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">
+                <% if user_signed_in? %>
+                  Logged in as <%= @current_user.name %>
+                <% else %>
+                  You are not logged in 
+                <% end %>
+              </a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+
+            <%= form_tag articles_path, method: :get do %>
+              <%= text_field_tag :search,"", class: "form-control mr-sm-2", placeholder: "Search"%>
+              <%= submit_tag 'Search', class: "btn btn-outline-success my-2 my-sm-0" %>
+            <% end %>
+            <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+          </form>
+        </div>
+      </nav>
+
+
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>">
           <%= value %>
         </div>
       <% end %>
       
-      <% if user_signed_in? %>
-        Logged in as <%= @current_user.name %>
-        <%= link_to 'Logout', logout_path, class: "float-right", method: :delete, data: {confirm: "sure to logout?"} %>
-      <% else %>
-        <%= link_to 'Login', login_path,class: "float-right" %>
-      <% end %>
 
      <%= yield %>
     </div>
