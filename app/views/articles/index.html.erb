@@ -7,7 +7,12 @@
   <h4><%= link_to article.title, article %><br></h4>
   <%= @markdown.render(article.text).html_safe %>
 
-<em>Created <%= time_ago_in_words(article.created_at) %> ago</em> by <strong><%= article.user.name %></strong>
+<em>Created <%= time_ago_in_words(article.created_at) %> ago</em> by <strong><%= article.user.name %></strong> 
+<% if article.views == 0 %>
+  no view
+<% else %>
+  <%= pluralize(article.views, 'view') %>
+<% end %>
 <br>
   <% if user_signed_in? && session[:user_id] == article.user.id %>
     <%= link_to 'Show', article %>

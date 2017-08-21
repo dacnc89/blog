@@ -10,6 +10,7 @@ class ArticlesController < ApplicationController
 
   def show
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    @article.increase_article_views
   end
 
   def new

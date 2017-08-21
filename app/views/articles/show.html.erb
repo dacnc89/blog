@@ -1,7 +1,11 @@
 <%= @article.title %><br>
 <%= @markdown.render(@article.text).html_safe %>
 
-
+<% if @article.views == 0 %>
+  no view
+<% else %>
+  <%= pluralize(@article.views, 'view') %>
+<% end %>
 
 <h4> Comments </h4>
 <%= render @article.comments %>

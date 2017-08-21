@@ -11,5 +11,11 @@ class Article < ApplicationRecord
       order('id ASC')
     end
   end
+
+  def increase_article_views
+    self.views += 1
+    save!
+  end
+
 end
 
