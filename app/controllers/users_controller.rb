@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :edit, :update, :destroy, :following, :followers]
+
   def index
     @users = User.all
   end
@@ -44,6 +46,18 @@ class UsersController < ApplicationController
       flash[:succes] = "Can not delete user, you dont have supper user permission"
     end
   end 
+  
+  def following
+    @user = User.find(params[:id])
+    @users = @user.following
+    render 'show_follow'
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follow'
+  end
 
   private
   def user_params

@@ -2,10 +2,16 @@
 <%= image_tag @user.avatar, width: 80, height: 80 %>
 <p> Name: <br>
 <%= @user.name %>
+<p> ID: <br>
+<%= @user.id %>
 </p>
 <p> Email <br>
 <%= @user.email %>
 </p>
+<%= render 'shared/stats' %>
+
+<%= render 'follow_form' if user_signed_in? %>
+
 <%= link_to 'Manager user', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 

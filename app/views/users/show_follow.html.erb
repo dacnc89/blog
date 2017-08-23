@@ -1,0 +1,9 @@
+<%= @user.name %>
+<%= link_to "View my profile", user_path(@user) %>
+
+<% render 'shared/stats' %>
+<% if @users.any? %>
+  <% @users.each do |user| %>
+    <%= user.name  %>
+  <% end %>
+<% end %>
