@@ -1,16 +1,18 @@
-<%= form_for @article do |f| %>
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </p>
+<%= form_for @article , html: {class: "form-group"} do |f|  %>
+  <fieldset class= "form-group">
+    <div>
+      <%= f.label :title, class: "form-label" %>
+      <%= f.text_field :title, class: "form-control", autofocus: true %>
+    </div>
+    
 
-  <p>
-    <%= f.label :text %>
-    <%= f.text_area :text %>
-  </p>
+    <div>
+      <%= f.label :text, class: "form-label" %>
+      <%= f.text_area :text, class: "form-control" %>
+    </div>
+  </fieldset>
 
-  <p>
-    <%= f.submit %> 
-  </p>
+  <div class= "form-group"> 
+   <%= f.submit "Create Article", class: "btn btn-primary" %> 
+  </div>
 <% end %>
-|

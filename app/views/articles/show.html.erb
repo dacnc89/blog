@@ -1,19 +1,31 @@
 <% content_for :title do %>
   <% @article.title %>
 <% end %>
+<article >
 <%= @article.title %><br>
 <%= @markdown.render(@article.text).html_safe %>
+</article>
 
-<% if @article.views == 0 %>
-  no view
-<% else %>
-  <%= pluralize(@article.views, 'view') %>
-<% end %>
+<div id="article-info">
+  <% if @article.views == 0 %>
+    no view
+  <% else %>
+    <%= pluralize(@article.views, 'view') %>
+  <% end %>
+</div>
 
-<h4> Comments </h4>
-<%= render @article.comments %>
-<%= render 'comments/form' %>
 
+<%= link_to 'Comments', "#", id: "comments-link" %>
+
+
+<section id="comments-section" style = "display:none">
+  <div id="show-comments">
+    <%= render @comments %>
+  </div>
+  <div id = "show-comment-create-form">
+    <%= render 'comments/form' %>
+  </div>
+</section>
 
 <br>
 <%= link_to 'Back', root_path %>

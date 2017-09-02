@@ -4,27 +4,32 @@
 
 
 <h1>list articles</h1>
-<br>
+<section id = "show-articles">
 
-<% @articles.each do |article| %>
-  <h4><%= link_to article.title, article %><br></h4>
-  <%= @markdown.render(article.text).html_safe %>
+  <% @articles.each do |article| %>
+    <article id = "show-article-<%=article.id%>">
 
-<em>Created <%= time_ago_in_words(article.created_at) %> ago</em> by <strong><%= article.user.name %></strong> 
-<% if article.views == 0 %>
-  no view
-<% else %>
-  <%= pluralize(article.views, 'view') %>
-<% end %>
+      <h4><%= link_to article.title, article %><br></h4>
+      <%= @markdown.render(article.text).html_safe %>
+
+    <em>Created <%= time_ago_in_words(article.created_at) %> ago</em> by <strong><%= article.user.name %></strong> 
+    <% if article.views == 0 %>
+      no view
+    <% else %>
+      <%= pluralize(article.views, 'view') %>
+    <% end %>
+    <br>
+      <% if user_signed_in? && session[:user_id] == article.user.id %>
+        <%= link_to 'Show', article %>
+        <%= link_to 'Edit', edit_article_path(article) %>
+        <%= link_to 'Delete', article, method: :delete, data: {confirm: 'Do you want to delete this article?'} %><br>
+    <% end %>
+    <br>
+    <br>
+  </article> <!-- show article div -->
+  <% end %>
 <br>
-  <% if user_signed_in? && session[:user_id] == article.user.id %>
-    <%= link_to 'Show', article %>
-    <%= link_to 'Edit', edit_article_path(article) %>
-    <%= link_to 'Delete', article, method: :delete, data: {confirm: 'Do you want to delete this article?'} %><br>
-<% end %>
-<br>
-<br>
-<% end %>
-<br>
-<br>
-<%= link_to 'New Article', new_article_path %>
+</section> <!-- show articles section -->
+<div class="pagination">
+  <%= will_paginate @articles, renderer: BootstrapPagination::Rails, class: "pagination" %>
+</div>

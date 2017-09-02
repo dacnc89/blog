@@ -1,18 +1,13 @@
 <!-- <h1> Form for comment </h1> -->
-<%= form_for [ @article, @article.comments.build] do |f| %>
-  <!-- <p>Please enter your comment  -->
-  <p>
-    <%= f.submit %>
-  <!-- </p>
-  <% if current_user %>
-    <%= current_user.name %> :
-  <% end %> -->
-  </p>
-
-  <p>
-    <!-- <%= f.label :body %> -->
-    <%= f.text_area :body %>
-  </p>
-  
-  
+<%= form_for [ @article, @article.comments.new], remote: true, html: {id: "create-comment-form"} do |f| %>
+  <fieldset class = "form-group">
+    <ol>
+      <li class= "form-group">
+        <%= f.text_area :body, rows: 2, cols: 60, placeholder: "Write a comment...", id: "comment-body", class: "form-control" %>
+      </li>
+      <li class= "form-group">
+        <%= f.submit 'Post Comment',id: "post-comment", class: 'btn btn-info' %>
+      </li>
+    </ol>
+  </fieldset>
 <% end %>

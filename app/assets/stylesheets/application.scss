@@ -1,1 +1,14 @@
 @import "bootstrap";
+@import "colors";
+
+#comments-link{
+  font-size: .95em;
+  color: $link-color;
+  text-decoration: underline;
+}
+
+#create-comment-form{
+  li {
+    list-style: none;
+  }
+}

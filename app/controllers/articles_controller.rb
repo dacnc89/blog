@@ -4,25 +4,31 @@ class ArticlesController < ApplicationController
   before_action :check_owner, only: [:edit, :destroy]
 
   def index
-    @articles = Article.search(params[:search])
+    @articles = Article.search(params[:search]).page(params[:page]).per_page(4)
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    if user_signed_in?
+      @article = current_user.articles.new
+    end
   end
 
   def show
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     @article.increase_article_views
+    @comments = @article.comments.all
   end
 
   def new
-    @article = Article.new
+    @article = current_user.articles.new
+    
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
     if @article.save
       flash[:success] = "Created article #{@article.title}"
       redirect_to root_path
     else
+      flash[:warning] = "Please fill you title and article to create!"
       render 'new'
     end
   end
@@ -37,7 +43,7 @@ class ArticlesController < ApplicationController
       flash[:success] = "Edit successful"
       redirect_to article_path
     else
-      flash[:warning] = "Some error when updating article #{@article.errors.full_messages}"
+      flash.now[:warning] = "Some error when updating article #{@article.errors.full_messages}"
       render 'edit'
     end
   end

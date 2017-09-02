@@ -8,10 +8,51 @@
 // compiled file. JavaScript code in this file should be added after the last require_* statement.
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
+// about supported directivesedy(function() {
+
+//= require jquery
 //= require bootstrap
 //= require bootstrap-sprockets
-//= require jquery
 //= require rails-ujs
 //= require_tree .
+
+
+
+$(document).ready(function() {
+  
+  // $article_form = document.getElementById('article-form');
+  // $new_article_btn = document.getElementById('new-article-btn')
+  // $('#article_form').on('click', function () {
+
+  //   alert("pop");
+  //   $.ajax({
+  //     url:  'articles/new',
+  //     type: 'GET',
+  //     success:  function(htmlc){
+  //       alert("success");
+  //       $('#show-form').toggle()
+  //       $('#article_form').append(htmlc)
+  //     }
+  //   });
+  // });
+
+
+
+  // Show comment form
+  $('#comments-link').on('click', function(){
+    // alert("clicked!")
+    $('#comments-section').toggle();
+    $('#comment-body').focus();
+  });
+
+
+
+ 
+ 
+});
+
+
+
+
+
+

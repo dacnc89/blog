@@ -1,0 +1,11 @@
+
+
+<%= form_for [@comment.article_id, @comment],remote: true,html:{ class: "edit-comment-form form-group"}, url: article_comment_path(@comment.article_id, @comment) do |f| %>
+  <fieldset class = "form-group">
+    <%= f.text_area :body , class: "form-contrl"%>
+  </fieldset>
+
+  <fieldset class = "form-group">
+    <%= f.submit %>
+  </fieldset>
+<% end %>

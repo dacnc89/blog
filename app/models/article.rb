@@ -3,7 +3,9 @@ class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
   validates :title, presence: true, uniqueness: true
   validates :text, presence: true, length: {minimum: 50}
-  
+
+  # limit articles per page to use will_paginate
+
   def self.search(search_params)
     if search_params
       where('title || text LIKE ?', "%#{search_params}%").order('created_at DESC')
