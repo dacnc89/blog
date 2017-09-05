@@ -16,7 +16,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "created user."
+      session[:user_id] = @user.id
+      flash[:success] = "created user, you're logged in."
       redirect_to root_path
     else
       render 'new'
