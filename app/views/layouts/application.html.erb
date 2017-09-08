@@ -41,7 +41,7 @@
 
                 <% if user_signed_in? %>
                   <!-- Logged in as <%= @current_user.name %> -->
-                  <%= link_to 'Logout', logout_path, class: "nav-link", method: :delete, data: {confirm: "sure to logout?"} %>
+                  <%= link_to 'Logout', logout_path, class: "nav-link" %>
                 <% else %>
                   <%= link_to 'Login', login_path,class: "nav-link" %> 
                 <% end %>
