@@ -12,5 +12,5 @@ production:
   encoding: unicode
   pool:     5
   database: blog_production
-  username: postgres
-  password: postgres  
+  username: postgresdev
+  password: postgresdev
