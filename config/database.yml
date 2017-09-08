@@ -4,5 +4,13 @@ development:
   pool: 5
   host: localhost
   username: postgres
-  password: congdac
+  password: postgres 
   database: blog
+
+production:
+  adapter:  postgresql
+  encoding: unicode
+  pool:     5
+  database: blog_production
+  username: postgres
+  password: postgres  
