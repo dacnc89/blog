@@ -70,5 +70,6 @@ group :production do
   gem 'jquery-rails'
   gem 'rails_12factor'
   gem 'heroku-deflater'  
+  gem 'therubyracer'
 end
 
