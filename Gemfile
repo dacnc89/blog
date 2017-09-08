@@ -36,6 +36,11 @@ gem 'execjs'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 
+group :assets do
+  gem 'coffee-rails', '~> 4.2'
+  gem 'uglifier', '>= 1.3.0'
+end
+
 # gem 'turbolinks', '~> 5'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

@@ -19445,6 +19445,7 @@ $(document).on 'page:change', ->
 
 
 
+// require turbolinks
 
 
 
@@ -19477,7 +19478,6 @@ $(document).ready(function() {
     $('#comments-section').toggle();
     $('#comment-body').focus();
   });
-
 
 
  
