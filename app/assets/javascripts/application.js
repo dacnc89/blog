@@ -11,9 +11,9 @@
 // about supported directivesedy(function() {
 
 //= require jquery
+//= require rails-ujs
 //= require bootstrap
 //= require bootstrap-sprockets
-//= require rails-ujs
 //= require_tree .
 
 
