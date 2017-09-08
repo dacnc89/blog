@@ -40,7 +40,7 @@ $(document).ready(function() {
 
   // Show comment form
   $('#comments-link').on('click', function(){
-    // alert("clicked!")
+     alert("clicked!")
     $('#comments-section').toggle();
     $('#comment-body').focus();
   });
